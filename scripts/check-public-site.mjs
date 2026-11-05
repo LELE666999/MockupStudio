@@ -48,7 +48,7 @@ try{
  expect(failed.filter(u=>u.includes('/api/'))).toEqual([]);
  const before=await read();await page.reload();await expect.poll(async()=>(await read()).stage?.preset,{timeout:30000}).toBe(before.stage.preset);
  expect((await read()).models[0].screenshot).toMatch(/^(blob:|data:)/);
- await controls.getByRole('button',{name:'高级',exact:true}).click();await controls.getByRole('button',{name:'HUAWEI Mate 70 Pro',exact:false}).click();
+ await controls.getByRole('button',{name:'高级',exact:true}).click();await controls.getByRole('region',{name:'华为模型'}).getByRole('button',{name:'HUAWEI Mate 70 Pro',exact:false}).click();
  await expect.poll(async()=>(await read()).models[0].subMeshes.length).toBeGreaterThan(0);
  await controls.getByRole('button',{name:'简单',exact:true}).click();
  await controls.getByRole('button',{name:'阔折叠样机',exact:true}).click();

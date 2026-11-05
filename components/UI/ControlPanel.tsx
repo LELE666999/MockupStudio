@@ -3,6 +3,8 @@ import {replaceScreen,replaceCoverScreen} from '../../utils/replaceScreen';
 
 import React, { useRef, useState, useEffect } from 'react';
 import { MODEL_PRESETS } from '../../utils/modelPresets';
+import type { ModelPreset } from '../../utils/modelPresets';
+import { ModelLibrary } from './ModelLibrary';
 import {isAppleDuo,APPLE_DUO_INNER} from '../../utils/appleDuoFold';
 import {isAppleModel} from '../../utils/modelMaterials';
 import {StagePanel} from './StagePanel';
@@ -287,12 +289,11 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({ state, updateState, 
       }
   };
 
-  const handlePresetSelect = (path: string) => {
-      const preset = MODEL_PRESETS.find(p=>p.file===path);
-      if (!preset) return;
+  const handlePresetSelect = (preset: ModelPreset, resource: string) => {
+      const path=preset.file;
       save();
       const bodyColor=path.includes('iphone18')?'#543a3e':path.includes('iphone-duo')?'#f3ede5':path.includes('iphone17')?'#d9723d':'#e0e0e0';
-      updateActiveModel({fbxFile:path,sourceFile:path,mode:'fbx',modelFormat:preset.format,selectedScreenMesh:preset.screen,name:preset.name,position:activeModel?.position||[0,0,0],rotation:[0,0,0],scale:1,subMeshes:[],bodyColor,bodyColorOverride:false,foldAngle:isAppleDuo(path)?180:undefined,textureRotation:0,textureFlipX:false,textureFlipY:false});
+      updateActiveModel({fbxFile:resource,sourceFile:path,mode:'fbx',modelFormat:preset.format,selectedScreenMesh:preset.screen,name:preset.name,position:activeModel?.position||[0,0,0],rotation:[0,0,0],scale:1,subMeshes:[],bodyColor,bodyColorOverride:false,foldAngle:isAppleDuo(path)?180:undefined,textureRotation:0,textureFlipX:false,textureFlipY:false});
       updateState({isSelectingScreen:false});
   };
   const handleCanvasRatio = (ratio: number | 'auto') => { setShowCustomRatio(false); updateState({ canvasAspectRatio: ratio }); save(); };
@@ -364,7 +365,10 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({ state, updateState, 
                     </div>
                     <p className="text-[10px] text-gray-500 mb-3">点击选中 · Shift / ⌘ / Ctrl 多选 · 拖动轴移动或旋转</p><div className="grid grid-cols-2 gap-1 p-1 bg-black/40 rounded-2xl border border-white/5 shadow-inner">
                         <button onClick={() => { save(); updateActiveModel({ mode: 'simple' }); }} className={`flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-medium transition-all ${activeModel.mode === 'simple' ? 'bg-white/10 text-white shadow-sm border border-white/10' : 'text-gray-500 hover:text-gray-300'}`}><Box size={14} /> 简单</button>
-                        <button onClick={() => { save(); updateActiveModel({ mode: 'fbx' }); }} className={`flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-medium transition-all ${activeModel.mode === 'fbx' || activeModel.mode === 'stl' ? 'bg-white/10 text-white shadow-sm border border-white/10' : 'text-gray-500 hover:text-gray-300'}`}><Library size={14} /> 高级</button>
+                        <button onClick={() => {
+                            if(!activeModel.fbxFile){const preset=MODEL_PRESETS.find(p=>p.id==='mate70')!;handlePresetSelect(preset,preset.file);}
+                            else {save();updateActiveModel({mode:activeModel.modelFormat==='stl'?'stl':'fbx'});}
+                        }} className={`flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-medium transition-all ${activeModel.mode === 'fbx' || activeModel.mode === 'stl' ? 'bg-white/10 text-white shadow-sm border border-white/10' : 'text-gray-500 hover:text-gray-300'}`}><Library size={14} /> 高级</button>
                     </div>
                 </PanelSection>
 
@@ -389,15 +393,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({ state, updateState, 
                 {(activeModel.mode === 'fbx' || activeModel.mode === 'stl') && (
                 <>
                     <PanelSection title="模型文件">
-                        <div className="mb-4">
-                            <span className="text-[9px] font-bold text-gray-500 mb-2 block uppercase tracking-wider pl-1">预设机型库</span>
-                            <div className="grid grid-cols-1 gap-2">
-                                {['HUAWEI','Apple'].filter(brand=>MODEL_PRESETS.some(preset=>preset.name.startsWith(brand))).map(brand=><section key={brand} aria-label={brand==='HUAWEI'?'华为模型':'苹果模型'} className="space-y-2"><h4 className="text-xs font-bold text-gray-300 pt-2">{brand==='HUAWEI'?'华为 HUAWEI':'苹果 Apple'}</h4>{MODEL_PRESETS.filter(preset=>preset.name.startsWith(brand)).map(preset => <button key={preset.id} onClick={()=>handlePresetSelect(preset.file)} className={`w-full p-3 rounded-xl border text-left flex items-center gap-3 transition-colors ${activeModel.fbxFile===preset.file?'bg-blue-500/15 border-blue-500/50':'bg-white/5 border-white/10 hover:bg-white/10'}`}>
-                                  <Smartphone size={18} className="text-blue-400 shrink-0"/>
-                                  <div><div className="text-xs font-bold text-gray-200">{preset.name}</div><div className="text-[10px] text-gray-400 mt-1">{preset.description}</div></div>
-                                </button>)}</section>)}
-                            </div>
-                        </div>
+                        <ModelLibrary activeSource={activeModel.sourceFile||activeModel.fbxFile} onSelect={handlePresetSelect}/>
                         <button onClick={() => fbxInputRef.current?.click()} className="w-full h-10 border border-dashed rounded-xl flex items-center justify-center gap-2 text-xs mb-3 bg-white/5 border-white/10 text-gray-400 hover:bg-white/10">
                             <input type="file" ref={fbxInputRef} hidden accept=".fbx,.stl,.glb" onChange={(e) => handleFileUpload(e, 'fbx')} />
                             <span className="flex items-center gap-2"><UploadCloud size={14}/> 导入 FBX / STL / GLB</span>

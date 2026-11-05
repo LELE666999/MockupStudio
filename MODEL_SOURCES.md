@@ -4,6 +4,8 @@
 私人模型库不属于本项目的 MIT 授权范围，也没有被复制到本仓库或 Git 历史。
 编辑器仍支持导入用户合法取得的 GLB / FBX / STL，以及内嵌资源的 `.mockup3d` 文件。
 
+原高级库的 10 款型号名称和适配参数已保留，未随库分发的 8 个文件由用户在本地导入并保存在当前浏览器：`huawei-user-33889335.glb`、`huawei-user-24693859.glb`、`Pura70pro.fbx`、`iphone17-pro.glb`、`iphone17-pro-max.glb`、`iphone18-pro.glb`、`iphone18-pro-max.glb`、`iphone-duo.glb`。这些名称用于兼容已有项目文件，不构成厂商产品发布或开源授权声明。导入操作不上传模型，也不更改文件原有的权利归属。
+
 ## 随仓库分发
 
 - `components/Scene/SimpleMockup.tsx`、`FoldableBody.tsx`：本项目编写的参数化直板 / 折叠样机。
