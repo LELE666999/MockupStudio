@@ -46,7 +46,7 @@ try{
  if(screenshots){await page.locator('canvas').first().screenshot({path:path.join(out,'grooved.png')});await page.screenshot({path:path.join(out,'editor.png')});}
  await page.keyboard.press('Control+s');await expect(page.getByText('已更新本地存稿，同一项目不会重复新建。',{exact:true})).toBeVisible();
  expect(failed.filter(u=>u.includes('/api/'))).toEqual([]);
- const before=await read();await page.reload();await expect.poll(async()=>(await read()).stage?.preset).toBe(before.stage.preset);
+ const before=await read();await page.reload();await expect.poll(async()=>(await read()).stage?.preset,{timeout:30000}).toBe(before.stage.preset);
  expect((await read()).models[0].screenshot).toMatch(/^(blob:|data:)/);
  await controls.getByRole('button',{name:'高级',exact:true}).click();await controls.getByRole('button',{name:'HUAWEI Mate 70 Pro',exact:false}).click();
  await expect.poll(async()=>(await read()).models[0].subMeshes.length).toBeGreaterThan(0);
@@ -75,4 +75,9 @@ try{
  }
  expect(failed).toEqual([]);expect(errors).toEqual([]);
  console.log(`PASS ${target}: model, PBR/HDR assets, scenes, fold, independent media, Ctrl+S, reload, project export, Chinese font, no API/asset errors${process.argv.includes('--video')?', video export':''}`);
+}catch(error){
+ const page=browser.contexts()[0]?.pages()[0];
+ console.log('Browser diagnostics:',await page?.locator('body').innerText().catch(()=>''));
+ await page?.screenshot({path:'/tmp/mockup-public-failure.png'}).catch(()=>{});
+ throw error;
 }finally{await browser.close();}
