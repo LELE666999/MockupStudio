@@ -1,0 +1,7 @@
+Brown Photostudio 01 — Sergej Majboroda / Poly Haven
+Source: https://polyhaven.com/a/brown_photostudio_01
+License: CC0 1.0 Universal (public domain)
+https://creativecommons.org/publicdomain/zero/1.0/
+Bundled asset: brown_photostudio_01_2k.hdr
+MD5: 68850369d34d65fdd044b471581bc707
+Used as a real HDR lighting/reflection environment and distant panorama.

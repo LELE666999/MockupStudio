@@ -1,0 +1,42 @@
+{
+  "name": "3d-mockup-master",
+  "private": true,
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/build-offline.mjs",
+    "build:web": "vite build",
+    "check:site": "node --experimental-strip-types scripts/check-public-site.mjs",
+    "build:offline": "npm run build",
+    "preview": "vite preview",
+    "lint": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "start": "vite preview --host 127.0.0.1 --port 3337 --strictPort"
+  },
+  "dependencies": {
+    "@react-three/drei": "9.121.1",
+    "@react-three/fiber": "8.17.12",
+    "@tailwindcss/vite": "^4.2.2",
+    "lucide-react": "0.344.0",
+    "mp4-muxer": "5.1.0",
+    "postprocessing": "6.37.8",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "^4.2.2",
+    "three": "0.173.0",
+    "three-stdlib": "^2.36.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.14.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.173.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "esbuild": "^0.25.12",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

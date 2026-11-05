@@ -1,0 +1,5 @@
+{
+  "name": "3D Mockup Master",
+  "description": "A professional 3D mockup generator supporting screenshot projection, thickness adjustments, custom FBX import with material editing, and high-quality rendering.",
+  "requestFramePermissions": []
+}

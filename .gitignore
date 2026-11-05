@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+offline/
+saved-projects/
+dist-ssr
+test-results/
+playwright-report/
+migrated_prompt_history/
+.env
+.env.*
+*.usdz
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Personal media and model purchases are not public distribution assets.
+*.mockup3d
+*.mockup3d.bak
+*.rar
+*.blend
+*.max
+__pycache__/
+public/models/iphone*.glb
+public/models/huawei-user*.glb
+public/Pura70pro.fbx

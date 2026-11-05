@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>3D 样机大师</title>
+  <rect width="64" height="64" rx="15" fill="#14243d"/>
+  <path d="M42 10 50 16V47L42 55 23 51 16 45Z" fill="#357ba4"/>
+  <path d="M20 13 39 9Q44 8 44 13V47Q44 51 40 52L21 56Q16 57 16 52V19Q16 14 20 13Z" fill="#f1f8ff"/>
+  <path d="M21 19 39 15V45L21 49Z" fill="#38c5ed"/>
+  <path d="M21 36 39 22V35L21 49Z" fill="#83e6f5"/>
+  <path d="m27 15 6-1" stroke="#14243d" stroke-width="2" stroke-linecap="round"/>
+</svg>

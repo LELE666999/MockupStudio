@@ -1,0 +1,57 @@
+Bundled stage textures — downloaded 2026-10-03
+
+Charcoal brick scene — added 2026-10-04:
+Rough Concrete: https://polyhaven.com/a/rough_concrete
+Original 1K diffuse, roughness, AO and displacement PNG; 2K OpenGL normal.
+CC0: https://polyhaven.com/license
+height.bin is a filtered 256 × 256 field derived from the original height PNG.
+Locally authored closed brick geometry is displaced using that field; the
+normal/roughness/AO maps add subpixel aggregate without baked lighting.
+Refresh/checksum tool: scripts/download-brick-material.mjs.
+
+Rock 01: https://polyhaven.com/a/rock_01
+Concrete Floor 01: https://polyhaven.com/a/concrete_floor_01
+Rough Linen: https://polyhaven.com/a/rough_linen — added 2026-10-04.
+Source: Poly Haven, 1K JPG diffuse, OpenGL normal, and roughness channels.
+License: CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/
+https://polyhaven.com/license
+Files are unmodified originals. The renderer applies an editable color tint.
+Optional refresh/checksum tool: scripts/download-stage-materials.mjs.
+
+Scene implementation references (no external demo JavaScript executed):
+https://github.com/Erkaman/gl-rock — MIT; procedural chipped-rock design reference.
+https://github.com/pmndrs/drei — MIT; existing installed RoundedBox/PivotControls.
+https://github.com/mrdoob/three.js — MIT; existing geometry and noise helpers.
+Rock, slatted plinth and lattice geometry in this application are authored locally.
+Travertine, slate, terrazzo and neutral fabric microstructure maps are authored
+procedurally in utils/stageSurface.ts. Fur geometry and contact deformation are
+authored locally. Linen uses the original CC0 normal and roughness maps; its
+neutral albedo preserves the editable user-selected fabric color.
+
+Plain knit yarn centreline reference:
+https://github.com/keenancrane/plain-knit-yarn
+Tube meshing, twisted-ply relief, cable knit stitches and wool flyaways are
+authored locally. The reference's license is reproduced below and retained
+in the generated application's legal comments.
+
+MIT License
+
+Copyright (c) 2023 Keenan Crane
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
